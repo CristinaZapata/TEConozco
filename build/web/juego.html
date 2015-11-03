@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>TEConozco</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+              
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="js/controller.js"></script>
+    <script type="text/javascript" src="js/controllerImagenFondo.js"></script>
+    
+   <script language="javascript">		
+		var sonido = new Audio();
+		sonido.src = "sounds/button_click.mp3";
+		
+		function playSound(){
+			sonido.play();
+		}
+	</script>
+</head><!--/head-->
+
+<body>
+    <header class="navbar navbar-inverse navbar-fixed-top wet-asphalt" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><img src="images/logo2.png" alt="logo"></a><div id="titulo"><h2> TEConozco </h2></div>
+            </div>
+             <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="index.html">Inicio</a></li>
+                </ul>
+            </div>
+        </div>
+    </header><!--/header-->
+    
+    <!--<section id="main-slider2" class="no-margin">
+        <div class="carousel slide wet-asphalt">
+            <div class="carousel-inner">
+            
+            <div class="item active"><img src="images/fondo/aulas2.png" class="imgFondo" style="height:460px; width:500px;">
+                    <div class="container">
+                        <div class="row">                                    
+							<div id="borrego1" class="borregos"><img src="images/borrego/Borrego1.png" class="animation animated-item-1"/></div>
+							<div id="borrego2" class="borregos"><img src="images/borrego/Borrego2.png"/></div>
+							<div id="borrego3" class="borregos"><img src="images/borrego/Borrego3.png"/></div>
+							<div id="borrego4" class="borregos"><img src="images/borrego/Borrego4.png"/></div>
+							
+							<div class="input-group">
+								<input type="text" class="form-control" autocomplete="off" placeholder="Enter your email">
+	                       	</div>
+							
+							<div id="nuevoPersonaje"><input type="text" id="username" name="username" placeholder="Username" class="form-control"></div>
+							
+							<img src="images/bubble-icon.png" id="imgDialogo"  class="animation animated-item-1"/>
+							<div id="pregunta" class="animation animated-item-1"> <script src="js/JSON.js"></script></div>						
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <a class="prev hidden-xs" href="#main-slider" data-slide="prev">
+            <i class="icon-angle-left"></i>
+        </a>
+        <a class="next hidden-xs" href="#main-slider" data-slide="next">
+            <i class="icon-angle-right"></i>
+        </a>
+    </section>-->
+    
+	<footer id="" class="midnight-blue">
+        <div class="container" class="imagenes"><br/>
+        <img src="images/fondo/aulas2.png" class="imgFondo" id="imgFondo"style="position:absolute;left:0px; top:0xp;height:460px; width:500px; z-index:1;">
+                    <div class="container">
+                        <div class="row">                                    
+							<div id="borrego1" class="borregos"><img src="images/borrego/Borrego1.png" class="animation animated-item-1"/></div>
+							<div id="borrego2" class="borregos"><img src="images/borrego/Borrego2.png"/></div>
+							<div id="borrego3" class="borregos"><img src="images/borrego/Borrego3.png"/></div>
+							<div id="borrego4" class="borregos"><img src="images/borrego/Borrego4.png"/></div>
+		</div>					
+							<fieldset id="formaNuevoPersonaje" class="registration-form" style="z-index:5;">
+									<h6 style="color:black;">Ingresar el nombre del personaje y una pregunta asociada</h6>
+									<div class="form-group">
+										<input type="text" id="nombrePersonaje" name="nombrePersonaje" placeholder="Nombre del personaje" class="form-control">
+									</div>
+									<div class="form-group">
+										<input type="text" id="preguntaPersonaje" name="preguntaPersonaje" placeholder="Pregunta asociada al personaje" class="form-control">
+									</div>
+									<div class="form-group">
+                                                                            <button id="botonAgregar" class="btn btn-success btn-md btn-block">Agregar</button>
+									</div>
+								</fieldset>
+							
+						
+							<img src="images/bubble-icon.png" id="imgDialogo"  class="animation animated-item-1"/>
+							<div id="pregunta" class="animation animated-item-1" style="color:black;">¿Es hombre?</div>
+							
+							<!--<section id="registration" class="container" style="position:absolute; height:10px: left:100px;">
+							<form class="center" role="form">
+								<fieldset class="registration-form">
+									<h6 style="color:black;">Ingresar el nombre del personaje y una pregunta asociada</h6>
+									<div class="form-group">
+										<input type="text" id="nombrePersonaje" name="nombrePersonaje" placeholder="Nombre del personaje" class="form-control">
+									</div>
+									<div class="form-group">
+										<input type="text" id="preguntaPersonaje" name="preguntaPersonaje" placeholder="Pregunta asociada al personaje" class="form-control">
+									</div>
+									<div class="form-group">
+										<button class="btn btn-success btn-md btn-block">Agregar</button>
+									</div>
+								</fieldset>
+							</form>
+						</section>	-->					
+                        </div>
+                    </div>
+                    
+                    
+            <div class="row"><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                <div id="botonesResponder" class="animation animated-item-1">
+                    <input type="button" id = "botonYes" class="btn btn-block btn-lg btn-success" value="Sí"  class="animation animated-item-1" onclick="playSound()"/>
+                    <input type="button" id = "botonNo" class="btn btn-block btn-lg btn-danger" value="No"  class="animation animated-item-1" onclick="playSound()"/>
+                     <input type="button" id = "botonReiniciar" class="btn btn-block btn-lg btn-warning" value="Jugar de nuevo"  class="animation animated-item-1"/>
+                    <div id="embed"></div><br/>
+		</div>
+            </div>
+    </footer><!--/#footer-->
+    
+    <!--<script src="js/jquery.js"></script>-->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
