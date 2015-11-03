@@ -5,7 +5,11 @@ $(document).on("click", "#botonReiniciar", function() { // When HTML DOM "click"
                var data = {"respuesta" : "reiniciar"};
                $.post("servidor", data, function(responseJson) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
                     $.each(responseJson, function(index, item) { // Iterate over the JSON array.
-                         if(index == "pregunta")            $("#pregunta").text(item);           // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
+                         if(index == "pregunta"){
+                             $("#pregunta").text(item);
+                             $("#borrego6").hide();
+                             $("#borrego1").show();
+                         }           // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
                     });
                     
                 });
@@ -28,8 +32,19 @@ $(document).on("click", "#botonYes", function() { // When HTML DOM "click" event
                var data = {"respuesta" : "yes"};
                $.post("servidor", data, function(responseJson) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
                     $.each(responseJson, function(index, item) { // Iterate over the JSON array.
-                         if(index == "pregunta")            $("#pregunta").text(item);           // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
-                         else                               $("#pregunta").text("¿Es " + item + "?");
+                        if(index == "pregunta"){
+                            $("#pregunta").text(item);           // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
+                            
+                            if($("#pregunta").text() == "¡Sí! ¡Gané!"){
+                                $("#borrego6").show();
+                                $("#borrego1, #borrego2, #borrego3, #borrego4, #borrego5").hide();                                
+                            }
+                        }  
+                         else{
+                             $("#pregunta").text("¿Es " + item + "?");
+                            $("#borrego5").show();
+                            $("#borrego1, #borrego2, #borrego3, #borrego4, #borrego6").hide();                             
+                         }
                     });
                     
                 });
@@ -40,15 +55,21 @@ $(document).on("click", "#botonYes", function() { // When HTML DOM "click" event
                 $.post("servidor", data, function(responseJson) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
                     $.each(responseJson, function(index, item) { // Iterate over the JSON array.
                          if(index == "pregunta")            $("#pregunta").text(item);           // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
-                         else if(index == "respuesta")      $("#pregunta").text("¿Es " + item + "?");
+                         else if(index == "respuesta"){
+                             $("#pregunta").text("¿Es " + item + "?");
+                             $("#borrego5").show();
+                             $("#borrego1, #borrego2, #borrego3, #borrego4, #borrego6").hide();
+                         }
                          else if(index == "aprender")       
                          {
                              $("#pregunta").text(item);
+                             $("#borrego3").show();
+                             $("#borrego1, #borrego2, #borrego4, #borrego5, #borrego6").hide();
                              setTimeout(
                                 function(){
-                                    $("#imgFondo, #imgDialogo, #pregunta, #borrego1, #borrego2, #borrego3, #borrego4, #botonYes, #botonNo").hide();
+                                    $("#imgFondo, #imgDialogo, #pregunta, #borrego1, #borrego2, #borrego3, #borrego4, #borrego5, #borrego6, #botonYes, #botonNo").hide();
                                     $("#formaNuevoPersonaje").show();
-                             }, 1000);
+                             }, 2000);
                              
         
                         }
@@ -74,7 +95,7 @@ $(document).on("click", "#botonYes", function() { // When HTML DOM "click" event
 	});
 
 	//portfolio
-	$(window).load(function(){
+	/*$(window).load(function(){
 		$portfolio_selectors = $('.portfolio-filter >li>a');
 		if($portfolio_selectors!='undefined'){
 			$portfolio = $('.portfolio-items');
@@ -113,5 +134,5 @@ $(document).on("click", "#botonYes", function() { // When HTML DOM "click" event
 	//Pretty Photo
 	$("a[rel^='prettyPhoto']").prettyPhoto({
 		social_tools: false
-	});	
+	});*/	
 });

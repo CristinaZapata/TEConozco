@@ -19,8 +19,8 @@
 $(document).ready(function(){
 	
 	$("#formaNuevoPersonaje").hide();
-        $("#borrego2, #borrego3, #borrego4").hide();
-
+        $("#borrego2, #borrego3, #borrego4, #borrego5, #borrego6").hide();
+        $("#pregunta").text("¿Es hombre?");
 	
 	$("#botonYes").click(function(){
 		console.log("boton click NO");
@@ -39,6 +39,7 @@ $(document).ready(function(){
 	
 	$("#botonAgregar").click(function(){
 		console.log("boton click Agregar");
+                $("#pregunta").text("¿Es hombre?");
 		$("#imgFondo, #imgDialogo, #pregunta, #borrego1, #botonYes, #botonNo, #formaNuevoPersonaje").show();
 		$("#formaNuevoPersonaje").hide();
 	});
