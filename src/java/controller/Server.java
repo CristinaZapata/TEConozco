@@ -52,9 +52,10 @@ public class Server extends HttpServlet{
         isLeafNode = game.isLastQuestion();
     }
     
-    private JSONObject generarRespuesta(String resp)
+    private JSONObject generarRespuesta(HttpServletRequest request)
     {
         JSONObject obj = new JSONObject();
+        String resp = request.getParameter("respuesta");
         
         if(resp.equalsIgnoreCase("yes"))               
             {
@@ -76,12 +77,33 @@ public class Server extends HttpServlet{
                 }
                 else
                 {
-                    obj.put("aprender", "¡Me ganaste! \n ¿Quién es?");
+                    //obj.put("aprender", "¡Me ganaste! \n ¿Quién es?");
+                    obj.put("aprender", "Escribe una pregunta cuya respuesta sea 'sí' para tu personaje y 'no' para " + pregunta);
                     return obj; 
                 }
             }
-            else if(resp.equalsIgnoreCase("reiniciar"))     reiniciarJuego();
+            else if(resp.equalsIgnoreCase("reiniciar"))   
+            {
+                reiniciarJuego();
+            }
+            else if(resp.equalsIgnoreCase("aprender"))
+            {
+                //TODO - Validar en vista que ambos parámetros NO estén vacíos
+                String pregunta = request.getParameter("preguntaPersonaje");
+                String personaje = request.getParameter("nombrePersonaje");
+                
+                System.out.println("LA PREGUNTA ES: " + pregunta);
+                System.out.println("EL PERSONAJE ES: " + personaje);
+                
+                Juego.LeafNode  leaf = (Juego.LeafNode) game.current;
+                Juego.BranchNode branch = (Juego.BranchNode) game.penultimo;
+                                                       
+                game.addLeafNode(personaje, pregunta, leaf, game.penultimo);       
+                
+                obj.put("agradecer", "¡Muchas gracias! ¡Ahora soy más sabio!");
+            }
             
+        
             //Actualizar juego
             updateGame();
           
@@ -104,65 +126,9 @@ public class Server extends HttpServlet{
         response.setContentType("text/html");
 
         try{
-            String resp = request.getParameter("respuesta");
             
-            JSONObject obj = generarRespuesta(resp);
+            JSONObject obj = generarRespuesta(request);
             
-            /*
-            if(request.getParameter("nombrePersonaje") != null)
-            {
-                String nombrePersonaje = request.getParameter("nombrePersonaje");
-                String preguntaPersonaje = request.getParameter("preguntaPersonaje");
-                
-                game.addLeafNode(nombrePersonaje, preguntaPersonaje, (Juego.LeafNode) game.current, game.penultimo, respuesta);
-                
-            }
-            else
-            {
-                obj = generarRespuesta(resp);
-            }
-            //if(resp == null)    resp = "no";*/
-            
-            
-            
-           /*
-            if(resp.equalsIgnoreCase("yes"))               
-            {
-                if(!lastQuestionDisplayed)       
-                {
-                    this.respuesta = Juego.YES_LEFT_SIDE;
-                }
-                else
-                {
-                    //return el json con el "¡Sí! ¡Gané!
-                }
-            }
-            else if(resp.equalsIgnoreCase("no"))  
-            {
-                if(!lastQuestionDisplayed)
-                {
-                    this.respuesta = Juego.NO_RIGHT_SIDE;
-                }
-                else
-                {
-                    //return el json con el "¡Me ganaste! ¿Quién es?" Escribe el nombre y una pregunta asociada
-                }
-            }
-            else if(resp.equalsIgnoreCase("reiniciar"))     reiniciarJuego();
-            
-            //Actualizar juego
-            updateGame();
-            
-            JSONObject obj = new JSONObject();
-            
-            
-            if(!isLeafNode)          obj.put("pregunta", pregunta);
-            else                  
-            {
-                obj.put("respuesta", pregunta);
-                lastQuestionDisplayed = true;
-            }
-            */
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             //PrintWriter out = response.getWriter();

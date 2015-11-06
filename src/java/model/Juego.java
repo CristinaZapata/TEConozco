@@ -29,8 +29,9 @@ public class Juego {
         root.derecha = new LeafNode("Fernanda Montiel"); //Sí
         root.izquierda = new LeafNode("Rafael Lozano"); //No
         current = root;
+        penultimo = root;
     }
-    
+    /*  NO BORRAR EL MÉTODO DENTRO DE ESTE COMENTARIO
     //Adds a leaf node at the current position
     //TODO - change side to enum type, instead of String
     public void addLeafNode(String animal, String newQuestion, LeafNode currentLeaf, BranchNode branch, int side)
@@ -50,39 +51,35 @@ public class Juego {
         newBranch.derecha = currentLeaf;
         
     }
-    
-    private abstract class Node
+    */
+    public void addLeafNode(String animal, String newQuestion, LeafNode currentLeaf, BranchNode branch)
     {
-        protected Node derecha;
-        protected Node izquierda;
+        int side = -1;
         
-    }
-    
-    private class BranchNode extends Node
-    {
-        private String pregunta;
-        
-        private BranchNode() {}
-        
-        public BranchNode(Node derecha, Node izquierda, String pregunta)
+        if(branch.izquierda instanceof LeafNode)
         {
-            this.derecha = derecha;
-            this.izquierda = izquierda;
-            this.pregunta = pregunta;
+            if(currentLeaf.animal.equals(((Juego.LeafNode) branch.izquierda).animal))           side = Juego.YES_LEFT_SIDE;
         }
+        else if(branch.derecha instanceof LeafNode)
+        { 
+            if(currentLeaf.animal.equals(((Juego.LeafNode) branch.derecha).animal))             side = Juego.NO_RIGHT_SIDE; 
+        }
+        BranchNode newBranch = new BranchNode();
+        newBranch.pregunta = newQuestion;
+        
+        
+        LeafNode newLeaf = new LeafNode(animal);
+        
+        assert side == YES_LEFT_SIDE || side == NO_RIGHT_SIDE;
+        
+        if(side == YES_LEFT_SIDE)             branch.izquierda = newBranch;
+        else if(side == NO_RIGHT_SIDE)       branch.derecha = newBranch;
+
+        newBranch.izquierda = newLeaf;
+        newBranch.derecha = currentLeaf;
+        
     }
     
-    public class LeafNode extends Node
-    {
-        private String animal;
-        
-        public LeafNode(String animal)
-        {
-            this.animal = animal;
-            this.derecha = null;
-            this.izquierda = null;
-        }
-    }
     
     public String getCurrentQuestion()
     {
@@ -115,6 +112,7 @@ public class Juego {
     public void reset()
     {
         current = (BranchNode) root;
+        penultimo = root;
     }
     
     public void descendTree(int side)
@@ -147,7 +145,44 @@ public class Juego {
             }
         }
     }
-    /*
+    
+    
+    private abstract class Node
+    {
+        protected Node derecha;
+        protected Node izquierda;
+        
+    }
+    
+    public class BranchNode extends Node
+    {
+        String pregunta;
+        
+        private BranchNode() {}
+        
+        public BranchNode(Node derecha, Node izquierda, String pregunta)
+        {
+            this.derecha = derecha;
+            this.izquierda = izquierda;
+            this.pregunta = pregunta;
+        }
+    }
+    
+    public class LeafNode extends Node
+    {
+        String animal;
+        
+        public LeafNode(String animal)
+        {
+            this.animal = animal;
+            this.derecha = null;
+            this.izquierda = null;
+        }
+    }
+    
+    
+    
+    /*          //UNIT TEST
     public static void main(String[] args)
     {
         Juego ak = new Juego();
