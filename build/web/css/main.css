@@ -1121,16 +1121,21 @@ ul.faq li > div h3 {
 }
 
 #titulo{
-	position: relative;
+	position: relative !important;
 	top: 5px;
 	left: 0px;
 }
 
+#lema{
+	position:relative:
+	left:30%
+}
+
 #borregoInicio img{
-	width:60%;
+	width:300px;
 	position:relative;
 	top:20px;
-	left:100px;
+	left:23%
 }
 
 #jugarInicio{
@@ -1138,6 +1143,9 @@ ul.faq li > div h3 {
 	border:#2c3e50;
 	width:120px;
 	height:50px;
+	position:absolute;
+	left:40%;
+	top:440px !important;
 }
 
 #botonSaltar{
@@ -1164,33 +1172,6 @@ ul.faq li > div h3 {
 	height:550px;
 	width:510px;	
 	z-index:-1;
-}
-
-.borregos img{
-	position:absolute;
-	left: 270px;
-	top: 350px;
-	width:45%;
-	z-index:3;
-}
-
-#pregunta{
-	position:absolute;
-	left: 120px;
-	top: 200px;
-	width:55%;
-	z-index:2;
-	color:black;
-	font-size:16px;
-	font-family: 'Roboto', sans-serif;
-}
-
-#imgDialogo{
-	position:absolute;
-	left: 45px;
-	top: 100px;
-	width:55%;
-	z-index:2;
 }
 
 #imgTec{
@@ -1228,9 +1209,36 @@ ul.faq li > div h3 {
 	
 }
 
+.borregos img{
+	position:absolute;
+	left: 260px;
+	top: 300px;
+	width:280px;
+	z-index:3;
+}
+
+#pregunta{
+	position:absolute;
+	left: 120px;
+	top: 220px;
+	width:55%;
+	z-index:2;
+	color:black;
+	font-size:16px;
+	font-family: 'Roboto', sans-serif;
+}
+
+#imgDialogo{
+	position:absolute;
+	left: 45px;
+	top: 100px;
+	width:290px;
+	z-index:2;
+}
+
 #botonYes{
 	position:relative !important;
-	left: 40px !important;
+	left: 5% !important;
 	width: 200px !important;
 	height: 100px !important;
 	display: inline;
@@ -1238,7 +1246,7 @@ ul.faq li > div h3 {
 
 #botonNo{
 	position:relative !important;
-	left: 80px !important;
+	left: 10% !important;
 	width: 200px !important;
 	height: 100px !important;
 	display: inline;
@@ -1258,8 +1266,8 @@ ul.faq li > div h3 {
 	position:absolute !important;
 	left: 0px !important;
 	top: 0px !important;
-	width:500px !important;
-	height:520px !important;
+	width:100% !important;
+	height:80% !important;
 }
 
 #botonReiniciar{

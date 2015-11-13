@@ -10,7 +10,10 @@
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/prettyPhoto.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">    
+	<link rel="stylesheet" media="screen and (max-width: 600px)" href="css/main.css" />
+	<link rel="stylesheet" media="screen and (min-width: 601px) and (max-width: 900px)" href='css/mediano.css' />
+	<link rel="stylesheet" media="screen and (min-width: 901px)" href="css/normal.css" />
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
@@ -63,7 +66,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 align = "center">El único juego que te conoce</h3>
+                    <div id="lema"><h3 class="gap" align = "center">El único juego que te conoce</h3></div>
                     <div id = "borregoInicio"><img src = "images/borrego/BorregoPose1.png"/></div><br/><br/>
                     <p align="center"><a href="instrucciones.html" class="btn btn-primary btn-lg" id="jugarInicio" onclick="playSound()">Jugar</a></p>
                     <br/>

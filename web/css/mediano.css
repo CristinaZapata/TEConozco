@@ -1127,15 +1127,15 @@ ul.faq li > div h3 {
 }
 
 #lema{
-	position:relative:
-	left:30%
+	position:absolute !important;
+	left:40%;
 }
 
 #borregoInicio img{
 	width:300px;
 	position:relative;
-	top:20px;
-	left:23%
+	top:120px;
+	left:40%;
 }
 
 #jugarInicio{
@@ -1144,9 +1144,10 @@ ul.faq li > div h3 {
 	width:120px;
 	height:50px;
 	position:absolute;
-	left:40%;
+	left:50%;
 	top:440px !important;
 }
+
 
 #botonSaltar{
 	background-color:#f1c40f;
@@ -1160,6 +1161,8 @@ ul.faq li > div h3 {
 	border:#16a085;
 	width:120px;
 	height:50px;
+	position:absolute;
+	left:100px;
 }
 
 #jugarInicio :hover{
@@ -1208,20 +1211,19 @@ ul.faq li > div h3 {
 	z-index:2;
 	
 }
-
 .borregos img{
 	position:absolute;
-	left: 260px;
+	left: 60%;
 	top: 300px;
-	width:280px;
+	width:300px;
 	z-index:3;
 }
 
 #pregunta{
 	position:absolute;
-	left: 120px;
+	left: 40%;
 	top: 220px;
-	width:55%;
+	width:20%;
 	z-index:2;
 	color:black;
 	font-size:16px;
@@ -1230,15 +1232,15 @@ ul.faq li > div h3 {
 
 #imgDialogo{
 	position:absolute;
-	left: 45px;
+	left: 25%;
 	top: 100px;
-	width:290px;
+	width:300px;
 	z-index:2;
 }
 
 #botonYes{
 	position:relative !important;
-	left: 5% !important;
+	left: 15% !important;
 	width: 200px !important;
 	height: 100px !important;
 	display: inline;
@@ -1246,10 +1248,17 @@ ul.faq li > div h3 {
 
 #botonNo{
 	position:relative !important;
-	left: 10% !important;
+	left: 35% !important;
 	width: 200px !important;
 	height: 100px !important;
 	display: inline;
+}
+
+#botonReiniciar{
+	position:relative !important;
+	left: 37% !important;
+	width: 200px !important;
+	height: 60px !important;
 }
 
 #nuevoPersonaje{
@@ -1267,12 +1276,5 @@ ul.faq li > div h3 {
 	left: 0px !important;
 	top: 0px !important;
 	width:100% !important;
-	height:80% !important;
-}
-
-#botonReiniciar{
-	position:relative !important;
-	left: 170px !important;
-	width: 200px !important;
-	height: 60px !important;
+	/*height:100%!important;*/
 }
