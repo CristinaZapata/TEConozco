@@ -6,7 +6,9 @@
 package controller;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.TreeMap;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,11 +24,7 @@ import org.json.simple.JSONObject;
 @WebServlet("/servidor/*")
 public class Server extends HttpServlet{
     
-    private Juego game = new Juego();
-    private String pregunta;
-    private int respuesta = -1;
-    private boolean isLeafNode = false;
-    private boolean lastQuestionDisplayed = false;
+    private TreeMap<Integer, Sesion> sesiones = new TreeMap<Integer, Sesion>();
     
     /*
         1.- El juego inicia y el servidor manda la pregunta actual.
@@ -36,7 +34,7 @@ public class Server extends HttpServlet{
         5.- Rinse and repeat.
     
     */
-
+/*
     private void reiniciarJuego()
     {
         game.reset();
@@ -51,18 +49,35 @@ public class Server extends HttpServlet{
         pregunta = game.getCurrentQuestion();
         isLeafNode = game.isLastQuestion();
     }
+    */
     
     private JSONObject generarRespuesta(HttpServletRequest request)
     {
         JSONObject obj = new JSONObject();
         String resp = request.getParameter("respuesta");
+        String id = request.getParameter("id_sesion");
+        
+        System.out.println("ID_SESION: " + id);
+        
+        int id_sesion = Integer.parseInt(id);
+        
+        Sesion sesion = sesiones.get(id_sesion);
+        
+        System.out.println("ID_SESION: " + id);
+        
+        if(sesion == null)      
+        {
+            sesion = new Sesion();
+            sesiones.put(id_sesion, sesion);
+        }
         
         if(resp.equalsIgnoreCase("yes"))               
             {
-                if(!lastQuestionDisplayed)       
+                if(!sesion.isLastQuestionDisplayed())       
                 {
-                    this.respuesta = Juego.YES_LEFT_SIDE;
+                    sesion.setRespuesta(Juego.YES_LEFT_SIDE);
                 }
+                
                 else
                 {
                     obj.put("pregunta", "¡Sí! ¡Gané!");
@@ -71,20 +86,20 @@ public class Server extends HttpServlet{
             }
             else if(resp.equalsIgnoreCase("no"))  
             {
-                if(!lastQuestionDisplayed)
+                if(!sesion.isLastQuestionDisplayed())
                 {
-                    this.respuesta = Juego.NO_RIGHT_SIDE;
+                    sesion.setRespuesta(Juego.NO_RIGHT_SIDE);
                 }
                 else
                 {
                     //obj.put("aprender", "¡Me ganaste! \n ¿Quién es?");
-                    obj.put("aprender", "Escribe una pregunta cuya respuesta sea 'sí' para tu personaje y 'no' para " + pregunta);
+                    obj.put("aprender", "Escribe una pregunta cuya respuesta sea 'sí' para tu personaje y 'no' para " + sesion.getPregunta());
                     return obj; 
                 }
             }
             else if(resp.equalsIgnoreCase("reiniciar"))   
             {
-                reiniciarJuego();
+                sesion.reiniciarJuego();
             }
             else if(resp.equalsIgnoreCase("aprender"))
             {
@@ -95,25 +110,25 @@ public class Server extends HttpServlet{
                 System.out.println("LA PREGUNTA ES: " + pregunta);
                 System.out.println("EL PERSONAJE ES: " + personaje);
                 
-                Juego.LeafNode  leaf = (Juego.LeafNode) game.current;
-                Juego.BranchNode branch = (Juego.BranchNode) game.penultimo;
+                Juego.LeafNode  leaf = (Juego.LeafNode) sesion.getGame().current;
+                Juego.BranchNode branch = (Juego.BranchNode) sesion.getGame().penultimo;
                                                        
-                game.addLeafNode(personaje, pregunta, leaf, game.penultimo);       
+                sesion.getGame().addLeafNode(personaje, pregunta, leaf, sesion.getGame().penultimo);       
                 
                 obj.put("agradecer", "¡Muchas gracias! ¡Ahora soy más sabio!");
             }
             
         
             //Actualizar juego
-            updateGame();
+            sesion.updateGame();
           
             
             
-            if(!isLeafNode)          obj.put("pregunta", pregunta);
+            if(!sesion.isLeafNode())          obj.put("pregunta", sesion.getPregunta());
             else                  
             {
-                obj.put("respuesta", pregunta);
-                lastQuestionDisplayed = true;
+                obj.put("respuesta", sesion.getPregunta());
+                sesion.setLastQuestionDisplayed(true);
             }
             
             return obj;
