@@ -1,4 +1,6 @@
 jQuery(function($) {
+    
+    var id_sesion = Math.floor(Math.random() * 100000000);
 
 //Botón de reinicio
 $(document).on("click", "#botonReiniciar", function() { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
@@ -6,7 +8,7 @@ $(document).on("click", "#botonReiniciar", function() { // When HTML DOM "click"
                $('#botonYes').prop('disabled', false);
                $('#botonNo').prop('disabled', false);
                
-               var data = {"respuesta" : "reiniciar"};
+               var data = {"respuesta" : "reiniciar", "id_sesion" : id_sesion};
                $.post("servidor", data, function(responseJson) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
                     $.each(responseJson, function(index, item) { // Iterate over the JSON array.
                          if(index == "pregunta"){
@@ -27,7 +29,7 @@ $(document).on("click", "#botonAgregar", function() { // When HTML DOM "click" e
                var personaje = $("#nombrePersonaje").val();
                var pregunta = $("#preguntaPersonaje").val();
                
-               var data = {"respuesta" : "aprender", "nombrePersonaje" : personaje, "preguntaPersonaje" : pregunta};
+               var data = {"respuesta" : "aprender", "nombrePersonaje" : personaje, "preguntaPersonaje" : pregunta, "id_sesion" : id_sesion};
                $.post("servidor", data, function(responseJson) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
                     $.each(responseJson, function(index, item) { // Iterate over the JSON array.
                          if(index == "agradecer")            $("#pregunta").text(item);           // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
@@ -38,7 +40,7 @@ $(document).on("click", "#botonAgregar", function() { // When HTML DOM "click" e
             
 
 $(document).on("click", "#botonYes", function() { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-               var data = {"respuesta" : "yes"};
+               var data = {"respuesta" : "yes", "id_sesion" : id_sesion};
                $.post("servidor", data, function(responseJson) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
                     $.each(responseJson, function(index, item) { // Iterate over the JSON array.
                         if(index == "pregunta"){
@@ -60,7 +62,7 @@ $(document).on("click", "#botonYes", function() { // When HTML DOM "click" event
             });
 
      $(document).on("click", "#botonNo", function() { // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-                var data = {"respuesta" : "no"};
+                var data = {"respuesta" : "no", "id_sesion" : id_sesion};
                 $.post("servidor", data, function(responseJson) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
                     $.each(responseJson, function(index, item) { // Iterate over the JSON array.
                          if(index == "pregunta")            $("#pregunta").text(item);           // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
@@ -80,8 +82,7 @@ $(document).on("click", "#botonYes", function() { // When HTML DOM "click" event
                                     $("#formaNuevoPersonaje").show();
                                     $("#textoFormaNuevoPersonaje").text(item);
                              }, 1500);
-                             
-        
+                             $("#nombrePersonaje, #preguntaPersonaje").val("");
                         }
                     });
                 });
@@ -103,46 +104,4 @@ $(document).on("click", "#botonYes", function() { // When HTML DOM "click" event
 			$(this).css('margin-top',  ($('#main-slider').height() - $(this).height())/2);
 		});
 	});
-
-	//portfolio
-	/*$(window).load(function(){
-		$portfolio_selectors = $('.portfolio-filter >li>a');
-		if($portfolio_selectors!='undefined'){
-			$portfolio = $('.portfolio-items');
-			$portfolio.isotope({
-				itemSelector : 'li',
-				layoutMode : 'fitRows'
-			});
-			$portfolio_selectors.on('click', function(){
-				$portfolio_selectors.removeClass('active');
-				$(this).addClass('active');
-				var selector = $(this).attr('data-filter');
-				$portfolio.isotope({ filter: selector });
-				return false;
-			});
-		}
-	});
-
-	//contact form
-	var form = $('.contact-form');
-	form.submit(function () {
-		$this = $(this);
-		$.post($(this).attr('action'), function(data) {
-			$this.prev().text(data.message).fadeIn().delay(3000).fadeOut();
-		},'json');
-		return false;
-	});
-
-	//goto top
-	$('.gototop').click(function(event) {
-		event.preventDefault();
-		$('html, body').animate({
-			scrollTop: $("body").offset().top
-		}, 500);
-	});	
-
-	//Pretty Photo
-	$("a[rel^='prettyPhoto']").prettyPhoto({
-		social_tools: false
-	});*/	
 });

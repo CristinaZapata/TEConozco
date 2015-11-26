@@ -5,10 +5,12 @@
  */
 package controller;
 
+import DAO.DAOPreguntas;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.TreeMap;
+import java.sql.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -116,18 +118,35 @@ public class Server extends HttpServlet{
                 Juego.BranchNode branch = (Juego.BranchNode) sesion.getGame().penultimo;
                 
                 String penultimaPregunta = branch.pregunta;
+                
+                try{
+                   DAOPreguntas dao = new DAOPreguntas();
+                   dao.establecerConexion();
+
+                   Connection conexion = dao.getConexion();
+
+                   if (conexion != null)
+                   {
+                          Statement stmnt = conexion.createStatement();
+                          ResultSet rs = stmnt.executeQuery("INSERT INTO personaje(nombre, pregunta, pregunta_anterior) VALUES(" + personaje + ", '" + pregunta + "', '" + penultimaPregunta + "');");
+                   } else
+                   {
+                          System.out.println("No se pudo establecer una conexión con el servidor");
+                   }
+                }
+                catch(Exception e){
+                    e.printStackTrace(); 
+                    System .out.println("Error en el insert");
+                }             
                                                        
                 sesion.getGame().addLeafNode(personaje, pregunta, leaf, branch);       
                 
                 obj.put("agradecer", "¡Muchas gracias! ¡Ahora soy más sabio!");
             }
-            
-        
+     
             //Actualizar juego
             sesion.updateGame();
           
-            
-            
             if(!sesion.isLeafNode())          obj.put("pregunta", sesion.getPregunta());
             else                  
             {
