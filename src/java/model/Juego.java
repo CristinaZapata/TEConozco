@@ -164,7 +164,7 @@ public class Juego {
     
     public class BranchNode extends Node
     {
-        String pregunta;
+        public String pregunta;
         
         private BranchNode() {}
         

@@ -114,6 +114,8 @@ public class Server extends HttpServlet{
                 
                 Juego.LeafNode  leaf = (Juego.LeafNode) sesion.getGame().current;
                 Juego.BranchNode branch = (Juego.BranchNode) sesion.getGame().penultimo;
+                
+                String penultimaPregunta = branch.pregunta;
                                                        
                 sesion.getGame().addLeafNode(personaje, pregunta, leaf, branch);       
                 
