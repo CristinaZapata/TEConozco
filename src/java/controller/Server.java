@@ -68,6 +68,8 @@ public class Server extends HttpServlet{
         if(sesion == null)      
         {
             sesion = new Sesion();
+            System.out.println("Se ha creado una nueva sesión con id: " + id_sesion);
+            
             sesiones.put(id_sesion, sesion);
         }
         
@@ -113,7 +115,7 @@ public class Server extends HttpServlet{
                 Juego.LeafNode  leaf = (Juego.LeafNode) sesion.getGame().current;
                 Juego.BranchNode branch = (Juego.BranchNode) sesion.getGame().penultimo;
                                                        
-                sesion.getGame().addLeafNode(personaje, pregunta, leaf, sesion.getGame().penultimo);       
+                sesion.getGame().addLeafNode(personaje, pregunta, leaf, branch);       
                 
                 obj.put("agradecer", "¡Muchas gracias! ¡Ahora soy más sabio!");
             }

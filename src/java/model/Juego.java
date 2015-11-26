@@ -26,8 +26,9 @@ public class Juego {
     {
         root = new BranchNode();
         root.pregunta = "¿Es hombre?";
-        root.derecha = new LeafNode("Fernanda Montiel"); //Sí
-        root.izquierda = new LeafNode("Rafael Lozano"); //No
+        
+        root.derecha = new LeafNode("Fernanda Montiel"); //No
+        root.izquierda = new LeafNode("Rafael Lozano"); //Sí
         current = root;
         penultimo = root;
     }
@@ -64,16 +65,19 @@ public class Juego {
         { 
             if(currentLeaf.animal.equals(((Juego.LeafNode) branch.derecha).animal))             side = Juego.NO_RIGHT_SIDE; 
         }
+        
+        if(side == -1)     side = Juego.NO_RIGHT_SIDE;
+        
         BranchNode newBranch = new BranchNode();
         newBranch.pregunta = newQuestion;
         
         
         LeafNode newLeaf = new LeafNode(animal);
         
-        assert side == YES_LEFT_SIDE || side == NO_RIGHT_SIDE;
+        //assert side == YES_LEFT_SIDE || side == NO_RIGHT_SIDE;
         
         if(side == YES_LEFT_SIDE)             branch.izquierda = newBranch;
-        else if(side == NO_RIGHT_SIDE)       branch.derecha = newBranch;
+        else if(side == NO_RIGHT_SIDE)        branch.derecha = newBranch;
 
         newBranch.izquierda = newLeaf;
         newBranch.derecha = currentLeaf;
@@ -125,10 +129,12 @@ public class Juego {
                 {
                     current = (BranchNode) current.izquierda;
                     penultimo = (BranchNode) current;
+                    System.out.println("Branch izquierda");
                 }
                 else //branch.izquierda is instance of LeafNode
                 {
                     current = (LeafNode) current.izquierda;
+                    System.out.println("Leaf izquierda");
                 }
             }
             else if(side == NO_RIGHT_SIDE)
@@ -137,10 +143,12 @@ public class Juego {
                 {
                     current = (BranchNode) current.derecha;
                     penultimo = (BranchNode) current;
+                    System.out.println("Branch derecha");
                 }
                 else
                 {
                     current = (LeafNode) current.derecha;
+                    System.out.println("Leaf derecha");
                 }
             }
         }
@@ -159,6 +167,11 @@ public class Juego {
         String pregunta;
         
         private BranchNode() {}
+        
+         public BranchNode(String pregunta)
+        {
+            this.pregunta = pregunta;
+        }
         
         public BranchNode(Node derecha, Node izquierda, String pregunta)
         {
